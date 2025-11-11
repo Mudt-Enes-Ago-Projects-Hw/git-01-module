@@ -1,0 +1,2 @@
+Base content
+Feature B: change from feature/b
