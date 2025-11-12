@@ -60,29 +60,9 @@ git commit -m "docs: add project description to README"
 
 ---
 
-## Step 4: Modify Main Branch
+## Step 4: Create Feature A Branch
 
 ![Modify Main Branch](images/Screenshot%202025-11-12%20at%2000.12.39.png)
-
-**What happened:**
-- Created `collide.txt` file with base content
-- Modified it on the main branch
-- This file will later cause merge conflicts
-- Commit: `c1c5d99 - chore(main): modify collide.txt on main`
-
-**Commands used:**
-```bash
-git add collide.txt
-git commit -m "chore(main): modify collide.txt on main"
-```
-
-**Note:** This is the common ancestor for both feature branches that will be created next.
-
----
-
-## Step 5: Create Feature A Branch
-
-![Create Feature A Branch](images/Screenshot%202025-11-12%20at%2000.15.51.png)
 
 **What happened:**
 - Created and switched to `feature/a` branch
@@ -90,39 +70,51 @@ git commit -m "chore(main): modify collide.txt on main"
 
 **Commands used:**
 ```bash
-git checkout -b feature/a
+git switch -c feature/a
 # or
 git branch feature/a
 git checkout feature/a
 ```
 
+**Note:** This is the common ancestor for both feature branches that will be created next.
+
 ---
 
-## Step 6: Implement Feature A
+## Step 5: Add File In Feature A Branch
 
-![Implement Feature A](images/Screenshot%202025-11-12%20at%2000.16.07.png)
+![Create Feature A Branch](images/Screenshot%202025-11-12%20at%2000.15.51.png)
 
 **What happened:**
-- Added `featureA.js` and `featureA.txt` files
-- Implemented Feature A functionality
-- Commit: `acac12c - feat(feature/a): add featureA files and implementation`
+- Created New Files `featureA.js` and `featureA.txt`
 
 **Commands used:**
 ```bash
-git add featureA.js featureA.txt
-git commit -m "feat(feature/a): add featureA files and implementation"
+git add .
+git commit -m "<message>"
 ```
 
 ---
 
-## Step 7: Document Feature A
+## Step 6: Show Graph
+
+![Implement Feature A](images/Screenshot%202025-11-12%20at%2000.16.07.png)
+
+**What happened:**
+- Shows graph of commits so far
+
+**Commands used:**
+```bash
+git log --oneline --graph --decorate --all
+```
+
+---
+
+## Step 7: Create Feature B Branch
 
 ![Document Feature A](images/Screenshot%202025-11-12%20at%2000.18.19.png)
 
 **What happened:**
-- Updated README.md to document Feature A work
-- Added Feature A description
-- Commit: `406fdf6 - docs(feature/a): document initial feature A work`
+- Created and switched to `feature/a` branch
 
 **Commands used:**
 ```bash
@@ -132,7 +124,7 @@ git commit -m "docs(feature/a): document initial feature A work"
 
 ---
 
-## Step 8: Feature A Modifies collide.txt
+## Step 8: Add & Commit files to Feature B
 
 ![Feature A Modifies collide.txt](images/Screenshot%202025-11-12%20at%2000.20.41.png)
 
@@ -144,94 +136,90 @@ git commit -m "docs(feature/a): document initial feature A work"
 
 **Commands used:**
 ```bash
-git add collide.txt
-git commit -m "feat(feature/a): change collide.txt to add Feature A line"
+git add featureB.js featureB.txt 
+git commit -m "<message>"
 ```
 
-**Important:** At this point, feature/a has diverged from main with changes to the same file (collide.txt).
 
 ---
 
-## Step 9: Create Feature B Branch
+## Step 9: Show Graph Again
 
 ![Create Feature B Branch](images/Screenshot%202025-11-12%20at%2000.27.47.png)
 
 **What happened:**
-- Switched back to main branch
-- Created and switched to `feature/b` branch
-- This branch will develop Feature B independently
+- Show the git graph again to visualize branches and commits
 
 **Commands used:**
 ```bash
-git checkout main
-git checkout -b feature/b
+git log --oneline --graph --decorate --all
 ```
 
 ---
 
-## Step 10: Document Feature B
+## Step 10: Add a colide file to create a conflict
 
 ![Document Feature B](images/Screenshot%202025-11-12%20at%2000.31.05.png)
 
 **What happened:**
-- Updated README.md to document Feature B work
-- Added Feature B description
-- Commit: `60264c9 - docs(feature/b): document initial feature B work`
-
-**Commands used:**
-```bash
-git add README.md
-git commit -m "docs(feature/b): document initial feature B work"
-```
-
----
-
-## Step 11: Feature B Modifies collide.txt
-
-![Feature B Modifies collide.txt](images/Screenshot%202025-11-12%20at%2000.31.38.png)
-
-**What happened:**
-- Modified `collide.txt` in feature/b branch
-- Added "Feature B: change from feature/b" line
-- This creates a three-way conflict scenario
-- Commit: `12da99f - feat(feature/b): change collide.txt to add Feature B line`
+- Switched to main branch
+- Created `collide.txt` in main branch
+- commited the new file
 
 **Commands used:**
 ```bash
 git add collide.txt
-git commit -m "feat(feature/b): change collide.txt to add Feature B line"
+git commit -m "<message>"
 ```
 
-**Important:** Now we have three versions of collide.txt:
+---
+
+## Step 11: Create collide file Feeture A
+
+![Feature B Modifies collide.txt](images/Screenshot%202025-11-12%20at%2000.31.38.png)
+
+**What happened:**
+- Create file collide.txt in feature/a branch
+- Commit the file
+
+**Commands used:**
+```bash
+git add collide.txt
+git commit -m "<message>"
+```
+
+**Important:** Now we have multiple versions of collide.txt:
 - Main branch: "Main: change from main branch"
 - Feature A: "Feature A: change from feature/a"
 - Feature B: "Feature B: change from feature/b"
 
 ---
 
-## Step 12: Merge Feature A into Main
+## Step 12: Create collide file in feaeture B 
 
 ![Merge Feature A into Main](images/Screenshot%202025-11-12%20at%2000.32.25.png)
 
 **What happened:**
-- Switched to main branch
-- Attempted to merge feature/a
-- **MERGE CONFLICT** occurred in `collide.txt`
-- Git detected conflicting changes to the same file
+- Create file collide.txt in feature/a branch
+- Commit the file
 
-**Commands used:**
+
+  **Commands used:**
 ```bash
-git checkout main
-git merge feature/a
+git add collide.txt
+git commit -m "<message>"
 ```
 
 ---
 
-## Step 13: Resolve Feature A Merge Conflict
+## Step 13: Merge Feature A into Main
 
 ![Resolve Feature A Merge Conflict](images/Screenshot%202025-11-12%20at%2000.33.32.png)
 
 **What happened:**
+- Attempted to merge feature/a
+- **MERGE CONFLICT** occurred in `collide.txt`
+- Git detected conflicting changes to the same file
 - Opened `collide.txt` to resolve conflicts
 - Git marked the conflicts with `<<<<<<<`, `=======`, and `>>>>>>>`
 - Manually edited the file to keep both changes
@@ -254,8 +242,15 @@ Main: change from main branch
 Feature A: change from feature/a
 ```
 
+
+![Merge Feature B into Main](images/Screenshot%202025-11-12%20at%2000.36.24.png)
+
+
+
 **Commands used:**
 ```bash
+git checkout main
+git merge feature/a
 # Edit collide.txt to resolve conflicts
 git add collide.txt
 git commit -m "fix: resolve merge conflict merging feature/a into main"
@@ -267,7 +262,7 @@ git commit -m "fix: resolve merge conflict merging feature/a into main"
 
 ## Step 14: Merge Feature B into Main
 
-![Merge Feature B into Main](images/Screenshot%202025-11-12%20at%2000.36.24.png)
+![Final README Update](images/Screenshot%202025-11-12%20at%2000.40.55.png)
 
 **What happened:**
 - Attempted to merge feature/b into main
@@ -312,6 +307,7 @@ Feature B: change from feature/b
 
 **Commands used:**
 ```bash
+nano collide.txt
 # Edit collide.txt to resolve conflicts
 git add collide.txt
 git commit -m "fix: resolve merge conflict merging feature/b into main"
@@ -321,24 +317,7 @@ git commit -m "fix: resolve merge conflict merging feature/b into main"
 
 ---
 
-## Step 16: Final README Update
-
-![Final README Update](images/Screenshot%202025-11-12%20at%2000.40.55.png)
-
-**What happened:**
-- Made final updates to README.md
-- Added comprehensive documentation about both features
-- Commit: `429f37a - fix README`
-
-**Commands used:**
-```bash
-git add README.md
-git commit -m "fix README"
-```
-
----
-
-## Step 17: View Git History 
+## Step 16: View Git History 
 
 ![View Git History](images/Screenshot%202025-11-12%20at%2000.41.26.png)
 
@@ -353,7 +332,7 @@ git log --oneline --graph --decorate --all
 
 ---
 
-## Step 18: Push to Github
+## Step 17: Push to Github
 
 ![Push to Github](images/Screenshot%202025-11-12%20at%2000.41.57.png)
 
@@ -399,6 +378,8 @@ type(scope): short description
 - `docs`: → documentation
 
 - `style`: → formatting
+
+- `chore`: → maintenance
 
 - `refactor`: → refactoring code
 
